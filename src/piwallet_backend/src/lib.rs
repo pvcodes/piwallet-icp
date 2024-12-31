@@ -80,24 +80,12 @@ fn send_tokens(to: Principal, amount: u64) -> WalletResult {
             return WalletResult::Err("Insufficient balance".to_string());
         }
 
+        // Deduct from sender and add to recipient
         w.balances.insert(caller, sender_balance - amount);
         let recipient_balance = w.balances.get(&to).copied().unwrap_or(0);
         w.balances.insert(to, recipient_balance + amount);
         
         WalletResult::Ok(format!("Successfully sent {} tokens to {}", amount, to))
-    })
-}
-
-#[update]
-fn receive_tokens(from: Principal, amount: u64) -> WalletResult {
-    let recipient = ic_cdk::api::caller();
-    
-    WALLET.with(|wallet| {
-        let mut w = wallet.borrow_mut();
-        let current_balance = w.balances.get(&recipient).copied().unwrap_or(0);
-        w.balances.insert(recipient, current_balance + amount);
-        
-        WalletResult::Ok(format!("Successfully received {} tokens from {}", amount, from))
     })
 }
 
