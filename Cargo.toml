@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "src/piwallet_backend"
+]
+resolver = "2"

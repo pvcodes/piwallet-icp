@@ -1,0 +1,27 @@
+{
+  "canisters": {
+    "piwallet_backend": {
+      "candid": "src/piwallet_backend/piwallet_backend.did",
+      "package": "piwallet_backend",
+      "type": "rust"
+    },
+    "piwallet_frontend": {
+      "dependencies": [
+        "piwallet_backend"
+      ],
+      "source": [
+        "src/piwallet_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "piwallet_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
