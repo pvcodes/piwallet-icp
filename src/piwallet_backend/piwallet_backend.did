@@ -1,3 +1,13 @@
+type WalletResult = variant {
+    "ok" : text;
+    "err" : text;
+};
+
 service : {
-    "greet": (text) -> (text) query;
-}
+    send_tokens : (to: principal, amount: nat64) -> (WalletResult);
+    receive_tokens : (from: principal, amount: nat64) -> (WalletResult);
+    get_balance : () -> (nat64);
+    address_exists : (principal) -> (bool);
+    get_total_supply : () -> (nat64);
+    mint : (to: principal, amount: nat64) -> (WalletResult);
+};
