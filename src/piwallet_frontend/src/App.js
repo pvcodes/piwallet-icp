@@ -43,15 +43,6 @@ class WalletApp {
 		this.#render();
 	};
 
-	#receiveTokens = async (e) => {
-		e.preventDefault();
-		const from = document.getElementById("receiveFrom").value;
-		const amount = Number(document.getElementById("receiveAmount").value);
-		const result = await piwallet_backend.receive_tokens(from, amount);
-		this.feedback = `Receive Tokens Result: ${JSON.stringify(result)}`;
-		this.#render();
-	};
-
 	#render() {
 		const body = html`
 			<style>
@@ -166,22 +157,6 @@ class WalletApp {
 							placeholder="Amount to Send"
 						/>
 						<button type="submit">Send Tokens</button>
-					</form>
-				</section>
-
-				<section>
-					<form @submit="${this.#receiveTokens}">
-						<input
-							id="receiveFrom"
-							type="text"
-							placeholder="Sender Address"
-						/>
-						<input
-							id="receiveAmount"
-							type="number"
-							placeholder="Amount to Receive"
-						/>
-						<button type="submit">Receive Tokens</button>
 					</form>
 				</section>
 
